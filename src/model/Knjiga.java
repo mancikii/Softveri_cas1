@@ -9,6 +9,7 @@ package model;
  * @author tesic
  */
 public class Knjiga {
+    private int id;
     private String naslov;
     private Autor autor;
     private String ISBN;
@@ -25,6 +26,16 @@ public class Knjiga {
         this.godinaIzdanja = godinaIzdanja;
         this.zanr = zanr;
     }
+
+    public Knjiga(int id, String naslov, Autor autor, String ISBN, int godinaIzdanja, ZanrKnjige zanr) {
+        this.id = id;
+        this.naslov = naslov;
+        this.autor = autor;
+        this.ISBN = ISBN;
+        this.godinaIzdanja = godinaIzdanja;
+        this.zanr = zanr;
+    }
+    
     
     
 
@@ -59,6 +70,16 @@ public class Knjiga {
     public void setGodinaIzdanja(int godinaIzdanja) {
         this.godinaIzdanja = godinaIzdanja;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     @Override
     public String toString() {

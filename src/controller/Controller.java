@@ -4,6 +4,7 @@
  */
 package controller;
 
+import baza.DBBroker;
 import java.util.ArrayList;
 import java.util.List;
 import model.Autor;
@@ -16,6 +17,8 @@ import model.ZanrKnjige;
  * @author tesic
  */
 public class Controller {
+    private DBBroker dbb;
+    
     private List<Knjiga> listaKnjiga;
     private List<Autor> listaAutora;
 
@@ -30,7 +33,11 @@ public class Controller {
         }
         
     private Controller(){
-        Autor autor1 = new Autor("Ivo", "Andric", 1899, "Biografija blabla");
+        dbb = new DBBroker();
+        
+        
+        
+       /* Autor autor1 = new Autor("Ivo", "Andric", 1899, "Biografija blabla");
         Autor autor2 = new Autor("Mesa", "Selimovic", 1920, "Biografija blabla");
         Autor autor3 = new Autor("Danilo", "Kis", 1935, "Biografija blabla");
          
@@ -46,7 +53,7 @@ public class Controller {
         
         listaKnjiga.add(knjiga1);
         listaKnjiga.add(knjiga2);
-        listaKnjiga.add(knjiga3);
+        listaKnjiga.add(knjiga3);*/
         }
 
     public List<Knjiga> getListaKnjiga() {
@@ -65,16 +72,31 @@ public class Controller {
         this.listaAutora = listaAutora;
     }
 
-    public void obrisiKnjigu(int selektovaniRed) {
-        listaKnjiga.remove(selektovaniRed);
+    public void obrisiKnjigu(int id) {
+        
+       dbb.obrisiKnjigu(id);
+        
+        //listaKnjiga.remove(selektovaniRed);
     }
 
     public void dodajKnjigu(Knjiga novaKnjiga) {
-        listaKnjiga.add(novaKnjiga);
+        dbb.dodajKnjigu(novaKnjiga);
         //System.out.println("KNJIGA JE DODATA");
         //System.out.println(listaKnjiga);
         
               
+    }
+
+    public List<Knjiga> ucitajListuKnjigaIzBaze() {
+      return dbb.ucitajListuKnjigaIzBaze();
+    }
+
+    public List<Autor> ucitajListuAutoraIzBaze() {
+        return dbb.ucitajListuAutoraIzBaze();
+    }
+
+    public void azurirajKnjigu(Knjiga knjigaZaIzmenu) {
+        dbb.azurirajKnjigu(knjigaZaIzmenu);
     }
          
     

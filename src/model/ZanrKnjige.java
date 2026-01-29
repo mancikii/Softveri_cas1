@@ -14,5 +14,7 @@ public enum ZanrKnjige {
     ISTORIJSKI,
     NAUCNA_FANTASTIKA,
     DETEKTIVSKI,
+    Roman,
+    Drama
     
 }
