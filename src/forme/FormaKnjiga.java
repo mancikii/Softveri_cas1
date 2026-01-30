@@ -197,10 +197,19 @@ public class FormaKnjiga extends javax.swing.JDialog {
 
     private void jButtonDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajActionPerformed
         String naziv = jTextFieldNaziv.getText();
+        if(naziv == null || naziv.trim().isEmpty() || naziv.trim().length()<3){
+        JOptionPane.showMessageDialog(this, "Naziv nije u odgovarajucem formatu!", "Greska", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
         String isbn = jTextFieldISBN.getText();
         int godIzdanja;
         try{
          godIzdanja = Integer.parseInt(jTextFieldGodinaIzdanja.getText());
+         if(godIzdanja < 1800 || godIzdanja >2026){
+        JOptionPane.showMessageDialog(this, "Godina izdanja nije dobro uneta!", "Greska", JOptionPane.ERROR_MESSAGE);
+        return;
+
+         }
        } catch(NumberFormatException e){
            JOptionPane.showMessageDialog(this, "Godina izdanja mora biti broj!", "Greska", JOptionPane.ERROR_MESSAGE);
            return;

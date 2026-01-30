@@ -7,8 +7,10 @@ package controller;
 import baza.DBBroker;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.Autor;
 import model.Knjiga;
+import model.User;
 import model.ZanrKnjige;
 
 
@@ -21,8 +23,7 @@ public class Controller {
     
     private List<Knjiga> listaKnjiga;
     private List<Autor> listaAutora;
-
-   
+    private List<User> listaUsera = new ArrayList<>();
    
     private static Controller instance;
     public static Controller getInstance(){
@@ -35,6 +36,15 @@ public class Controller {
     private Controller(){
         dbb = new DBBroker();
         
+        //Ovo je u slucaju da se cuva u lokalnoj memoriji
+        User u1 = new User(1, "mancikii", "123");
+        User u2 = new User(2, "gandziki", "123");
+        User u3 = new User(3, "anatesic", "123");
+        
+        listaUsera.add(u1);
+        listaUsera.add(u2);
+        listaUsera.add(u3);
+
         
         
        /* Autor autor1 = new Autor("Ivo", "Andric", 1899, "Biografija blabla");
@@ -72,6 +82,16 @@ public class Controller {
         this.listaAutora = listaAutora;
     }
 
+    public List<User> getListaUsera() {
+        return listaUsera;
+    }
+
+    public void setListaUsera(List<User> listaUsera) {
+        this.listaUsera = listaUsera;
+    }
+    
+    
+
     public void obrisiKnjigu(int id) {
         
        dbb.obrisiKnjigu(id);
@@ -88,7 +108,8 @@ public class Controller {
     }
 
     public List<Knjiga> ucitajListuKnjigaIzBaze() {
-      return dbb.ucitajListuKnjigaIzBaze();
+     this.listaKnjiga = dbb.ucitajListuKnjigaIzBaze();
+      return this.listaKnjiga;
     }
 
     public List<Autor> ucitajListuAutoraIzBaze() {
@@ -97,6 +118,62 @@ public class Controller {
 
     public void azurirajKnjigu(Knjiga knjigaZaIzmenu) {
         dbb.azurirajKnjigu(knjigaZaIzmenu);
+    }
+
+    public boolean login1(String username, String pass) {
+        for(User u: listaUsera){
+            if(u.getUsername().equals(username) && u.getPassword().equals(pass)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    public boolean login2(String username, String pass) {
+        return dbb.login(username, pass);
+    }
+
+    public List<Knjiga> filtriraj(String autor, String naziv) {
+        List<Knjiga> rezultat = new ArrayList<>();
+        if(autor!=null && naziv == null){
+            for(Knjiga k: listaKnjiga){
+                String autorKnjige = k.getAutor().getIme()+" "+k.getAutor().getPrezime();
+                if(autorKnjige.contains(autor)){
+                    rezultat.add(k);
+                }
+            }
+        }
+        if(autor == null && naziv!=null){
+            for(Knjiga k: listaKnjiga){
+                if(k.getNaslov().contains(naziv)){
+                    rezultat.add(k);
+                }
+            }
+        }
+        if(autor!=null && naziv!=null){
+            for(Knjiga k: listaKnjiga){
+                String autorKnjige = k.getAutor().getIme()+" "+k.getAutor().getPrezime();
+                if(autorKnjige.contains(autor) && k.getNaslov().contains(naziv)){
+                    rezultat.add(k);
+                }
+            }
+        }
+        
+//        //Radi istu stvar kao i ovo gore 
+//        List<Knjiga> rezultat2 = new ArrayList<>();
+//        
+//        rezultat2 = listaKnjiga.stream()
+//                .filter(k -> (naziv!=null && k.getNaslov().contains(naziv)) &&
+//                        (autor!=null && (k.getAutor().getIme()+" "+k.getAutor().getPrezime()).contains(autor)))
+//                .collect(Collectors.toList());
+        
+        
+        return rezultat;
+    }
+
+    public List<Knjiga> filtriraj2(String autor, String naziv) {
+        return dbb.filtriraj(autor, naziv);
     }
          
     

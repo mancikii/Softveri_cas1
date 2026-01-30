@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/baza/DBBroker.java</file>
             <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/forme/GlavnaForma.java</file>
-            <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/forme/FormaKnjiga.java</file>
-            <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/baza/Konekcija.java</file>
+            <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/forme/LoginForma.java</file>
+            <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/model/User.java</file>
             <file>file:/C:/Users/tesic/OneDrive/Dokumenti/NetBeansProjects/PS_CAS_1_2/src/controller/Controller.java</file>
         </group>
     </open-files>
